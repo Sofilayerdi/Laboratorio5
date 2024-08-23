@@ -3,24 +3,25 @@
 
 int main() {
     const int N=1000000;
-    double suma = 0.0;
-    double array[N];
+    long suma = 0;
     int i;
+    double start_time, end_time;
 
-  
-    for (i=0; i<N; i++)
-    {
-        array[i]= i*2;
-    }
+    start_time = omp_get_wtime();
 
     #pragma omp parallel for reduction(+:suma) 
-    {
-        for (i=0; i < N; i++){
-            suma += array[i];
-        }
+    for (i = 1; i <= N; i++) {
+        suma += i;
     }
 
-    printf("La suma es suma\n");
-    printf("El tiempo fue de ", omp_get_wtime());
+
+    end_time = omp_get_wtime();
+
+    double sum = end_time - start_time;
+
+    printf("La suma es %d\n ", suma);
+    printf("El tiempo fue de %f", end_time - start_time);
+
+    return 0;
 
 }
