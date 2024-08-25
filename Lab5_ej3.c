@@ -14,7 +14,6 @@ int main(int argc, char* argv[]) {
             for (int i = 1; i <= num; i++) {
                 factorial *= i;
             }
-
             printf("El factorial del numero %d es %d\n", num, factorial);
         }
 
@@ -24,34 +23,37 @@ int main(int argc, char* argv[]) {
             int n = 30;
             int suma = 0;
             for (int i = 2; i <= n; i++) {
-                int es_primo = 1;
+                int primo = 1;
                 for (int j = 2; j <= sqrt(i); j++) {
-                    es_primo = es_primo && (i % j != 0);
+                    if (i % j == 0) {
+                        primo = 0;
+                        break;
+                    }
                 }
-            if (es_primo) {
-                suma += i;
+                if (primo) {
+                    suma += i;
+                }
             }
+            printf("La suma de los numeros primos hasta %d es %d\n", n, suma);
             
-    
-
-        #pragma omp section
-        {
-            void encontrar_maximo(int arr[], int size) {
-            int maximo = arr[0];
-            for (int i = 1; i < size; i++) {
-                if (arr[i] > maximo) {
-                    maximo = arr[i];
-                }
-            }
-            printf("El valor máximo en el arreglo es %d\n", maximo);
-            }
-
-    
-
         }
 
-    }
-}
+         #pragma omp section
+        {
+            /* Encontrar valor mas grande demun array */
+            int array[] = {3, 45, 7, 23, 87, 12};
+            int size = sizeof(array) / sizeof(array[0]);
+            int maximo = array[0];
+            for (int i = 1; i < size; i++) {
+                if (array[i] > maximo) {
+                    maximo = array[i];
+                }
+            }
+            printf("El valor maximo en el arreglo es %d\n", maximo);
+        }
+
+    
 
     }
+
 }
